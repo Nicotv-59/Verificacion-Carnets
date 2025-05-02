@@ -18,7 +18,7 @@
             align-items: center;
         }
 
-        .verification-box {
+        .verification-box, .form-box {
             background-color: orange;
             padding: 30px;
             border-radius: 15px;
@@ -42,20 +42,76 @@
             max-width: 200px;
             height: auto;
         }
+
+        input[type="text"] {
+            padding: 10px;
+            width: 80%;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="verification-box">
+    <!-- Formulario de ingreso -->
+    <div class="form-box" id="form-box">
+        <div class="header">Verificación de Carnets</div>
+        <input type="text" id="documento" placeholder="Ingrese su número de documento">
+        <br>
+        <button onclick="verificarDocumento()">Verificar</button>
+    </div>
+
+    <!-- Resultado de verificación -->
+    <div class="verification-box hidden" id="verification-box">
         <div class="header">COLEGIO JUAN FRANCISCO BERBEO</div>
         <div class="message">
             Este carnet ha sido verificado por TVO BERBEO y es original
         </div>
         <img src="logo-tvo-berbeo.png" alt="Logo TVO BERBEO" class="logo">
-        <!-- Reemplaza "logo-tvo-berbeo.png" con la ruta real del logo -->
     </div>
 </div>
+
+<script>
+    // Lista de documentos válidos proporcionados
+    const documentosValidos = [
+        "1077999451",
+        "1014872886",
+        "1019606494",
+        "6021381",
+        "1028488616",
+        "1109665591",
+        "1142114049",
+        "1050278684",
+        "1232404567",
+        "4884870"
+    ];
+
+    function verificarDocumento() {
+        const documentoIngresado = document.getElementById("documento").value.trim();
+
+        if (documentosValidos.includes(documentoIngresado)) {
+            document.getElementById("form-box").classList.add("hidden");
+            document.getElementById("verification-box").classList.remove("hidden");
+        } else {
+            alert("Intento de falsificación de carnet");
+        }
+    }
+</script>
 
 </body>
 </html>
